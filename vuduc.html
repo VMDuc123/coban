@@ -1,0 +1,77 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Are you ready?</title>
+</head>
+<script>
+    const a = new XMLHttpRequest()
+    function getCallback(id, b) {
+        a.onreadystatechange = function () {
+            if (this.readyState === 4 && a.status === 200) {
+                data = JSON.parse(a.responseText);
+                b(null, data)
+                local dataString = JSON.stringify(data)
+            } if (this.readyState === 4 && a.status !== 200) {
+                b('huhh', null)
+            }
+        }
+        a.open("GET", `https://jsonplaceholder.typicode.com/todos/${id}`, true);
+        a.send();
+    };
+    getCallback(1, b = (error, data) => {
+        if (error) {
+            console.log('some wrongs:', error);
+        }
+        else {
+            console.log('project are ready:', data);
+
+
+
+            getCallback(4, b = (error, data) => {
+                if (error) {
+                    console.log('some wrongs:', error);
+                }
+                else {
+                    console.log('project are ready:', data);
+
+
+
+
+
+                    getCallback(3, b = (error, data) => {
+                        if (error) {
+                            console.log('some wrongs:', error);
+                        }
+                        else {
+                            console.log('project are ready:', data);
+
+
+
+
+                            getCallback(2, b = (error, data) => {
+                                if (error) {
+                                    console.log('some wrongs:', error);
+                                }
+                                else {
+                                    console.log('project are ready:', data);
+                                }
+                            })
+
+
+                        }
+                    })
+                }
+            })
+        }
+
+    })
+</script>
+
+<body>
+    <h1>Yes,I'm</h1>
+    <script>alert('Let go')</script>
+</body>
+
+</html>
